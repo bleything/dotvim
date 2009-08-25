@@ -1,0 +1,37 @@
+= Ben Bleything's .vim
+
+This repo is my real, daily use .vim. It is based on the work of many others,
+primarily the crew at {Opscode}[http://opscode.com].  See the Credits section
+below for more details.
+
+== Installation
+
+Pretty straightforward.  Clone and symlink:
+
+  $ git clone git://github.com/bleything/dotvim.git ~/.vim
+  $ ln -s ~/.vim/vimrc ~/.vimrc
+
+== What's Inside?!
+
+You know, stuff!
+
+== Credits
+
+[Mahlon Smith]     Responsible for getting me into vi in the first place and
+                   providing a ton of support, tips, and tricks over the years.
+                   You should go read {this blog post he wrote}[http://martini.nu/blog/2008/07/vim.html]
+                   about his vim setup.
+
+[Adam Jacob]       Upon whose config Joshua and AJ based their tweaks.
+                   Available on {the git hubs}[http://github.com/adamhjk/adam-vim].
+
+[Joshua Timberman] Various tweaks to Adam's config, available on {the git
+                   hubs}[http://github.com/jtimberman/dotvim].
+
+[AJ Christensen]   Various tweaks to Adam's config, available on {the git
+                   hubs}[http://github.com/fujin/dotvim].
+
+== Copyright and License
+
+I don't believe in copyrighting configs. However, some of the scripts and
+plugins and whatnot may be copyrighted; see those files for details.
