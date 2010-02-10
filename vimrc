@@ -52,10 +52,10 @@ set expandtab    " DIE TABS DIE
 
 """ show whitespace
 set list
-set listchars=tab:»·,trail:· " show tabs and trailing spaces
-set listchars+=extends:»     " show a » when a line goes off the right
+set listchars=tab:Â»Â·,trail:Â· " show tabs and trailing spaces
+set listchars+=extends:Â»     " show a Â» when a line goes off the right
                              " edge of the screen
-set listchars+=precedes:«    " show a « when a line goes off the left
+set listchars+=precedes:Â«    " show a Â« when a line goes off the left
                              " edge of the screen
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
