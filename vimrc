@@ -16,4 +16,7 @@
 source $HOME/.vim/basic.vimrc
 source $HOME/.vim/window.vimrc
 source $HOME/.vim/editing.vimrc
-source $HOME/.vim/gui.vimrc
+
+if has("gui_running")
+    source $HOME/.vim/gui.vimrc
+endif

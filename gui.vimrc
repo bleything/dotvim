@@ -11,7 +11,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ G U I   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set mouse=a " use mouse when possible
+colorscheme ir_black " use a nice 256-color scheme in the gui
+set mouse=a          " use mouse when possible
 
 " GUI option string.  Values:
 "   a: visual-mode selections go to the clipboard

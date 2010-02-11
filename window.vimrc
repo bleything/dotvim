@@ -32,12 +32,4 @@ set statusline+=%<%P                         " file position
 """ C O L O R   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark " use colors suitable for dark backgrounds
-
-" if we're in the GUI, use a nice 256-color scheme.  Otherwise,
-" use desert.
-if has("gui_running")
-  colorscheme ir_black
-else
-  colorscheme desert
-endif
-
+colorscheme desert  " shut up, I like desert.
