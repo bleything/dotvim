@@ -7,13 +7,15 @@
 """ Internet Electronic Mail: ben@bleything.net
 """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""
-""" To install, make this directory live at ~/.vim and then make the
-""" vimrc file live at ~/.vimrc
-"""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-source $HOME/.vim/basic
-source $HOME/.vim/colors
-source $HOME/.vim/editing
-source $HOME/.vim/gui
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" G U I   O P T I O N S
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set mouse=a " use mouse when possible
+
+" GUI option string.  Values:
+"   a: visual-mode selections go to the clipboard
+"   A: modeless selections go to the clipboard
+"   c: don't pop up windows; use the console for dialog boxes and such
+"   e: use GUI tab bar instead of text tab bar
+set guioptions=aAce

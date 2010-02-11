@@ -1,0 +1,33 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""
+""" Ben Bleything's .vimrc
+""" Based on the work of many others. See README.rdoc for credits.
+"""
+""" Git Hubs: http://github.com/bleything/dotvim
+""" Internet Electronic Mail: ben@bleything.net
+"""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" B A S I C   O P T I O N S
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible " to hell with vi compatibility!
+set ruler        " shows cursor position in the lower right
+set showcmd      " shows incomplete command to the left of the ruler
+set wildmenu     " fancy command completion menu!
+
+""" window settings
+set winminheight=0 " allow windows to be 0 lines tall
+set winminwidth=0  " allow windows to be 0 lines wide
+
+" Miscellaneous Options. Values:
+"   a: ":read" sets window filename
+"   A: ":write" sets window filename
+"   B: backslash has no special meaning in ":map"
+"   c: search continues from the end of the match
+"   e: automatically add <CR> to the end of executed registers
+"   F: ":write" sets buffer filename
+"   s: set buffer options on entering the buffer
+"   W: refuse to overwrite a readonly file, even with :w!
+"   Z: don't reset 'readonly' when using :w!
+set cpoptions=aABceFsWZ
