@@ -11,8 +11,13 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ G U I   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme ir_black " use a nice 256-color scheme in the gui
-set mouse=a          " use mouse when possible
+colorscheme ir_black        " use a nice 256-color scheme in the gui
+set mouse=a                 " use mouse when possible
+set guifont=Inconsolata:h16 " Inconsolata, 16pt high
+
+" set default window size
+set columns=170
+set lines=48
 
 " GUI option string.  Values:
 "   a: visual-mode selections go to the clipboard
