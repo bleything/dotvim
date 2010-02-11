@@ -12,13 +12,7 @@
 """ B A S I C   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible " to hell with vi compatibility!
-set ruler        " shows cursor position in the lower right
-set showcmd      " shows incomplete command to the left of the ruler
 set wildmenu     " fancy command completion menu!
-
-""" window settings
-set winminheight=0 " allow windows to be 0 lines tall
-set winminwidth=0  " allow windows to be 0 lines wide
 
 " Miscellaneous Options. Values:
 "   a: ":read" sets window filename
