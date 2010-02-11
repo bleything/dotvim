@@ -13,7 +13,7 @@
 """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-source $HOME/.vim/basic
-source $HOME/.vim/window
-source $HOME/.vim/editing
-source $HOME/.vim/gui
+source $HOME/.vim/basic.vimrc
+source $HOME/.vim/window.vimrc
+source $HOME/.vim/editing.vimrc
+source $HOME/.vim/gui.vimrc

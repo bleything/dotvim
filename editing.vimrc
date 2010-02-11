@@ -17,7 +17,7 @@ set showbreak=+ " display a + at the beginning of a wrapped line
 set showmatch   " flash the matching bracket on inserting a )]} etc
 
 """ whitespace settings
-set cindent      " c-style language indentation
+"set cindent      " c-style language indentation
 set smartindent  " automatically indent new lines
 set smarttab     " tab ... smartly?  not sure.
 set shiftwidth=4 " most of the time, we want a shiftwidth of 4
