@@ -7,17 +7,17 @@
 """ Internet Electronic Mail: ben@bleything.net
 """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""
-""" To install, make this directory live at ~/.vim and then make the
-""" vimrc file live at ~/.vimrc
-"""
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" K E Y   B I N D I N G S
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=',' " set leader to ,
 
-source $HOME/.vim/basic.vimrc
-source $HOME/.vim/window.vimrc
-source $HOME/.vim/editing.vimrc
-source $HOME/.vim/bindings.vimrc
+" format paragraphs (72 columns)
+map <leader>w {!}par w72qrg<CR>
 
-if has("gui_running")
-    source $HOME/.vim/gui.vimrc
-endif
+" one-stroke window maximizing
+map <C-H> <C-W>h<C-W><BAR>
+map <C-L> <C-W>l<C-W><BAR>
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
