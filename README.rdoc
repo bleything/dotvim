@@ -6,10 +6,11 @@ below for more details.
 
 == Installation
 
-Pretty straightforward.  Clone and symlink:
+Pretty straightforward.  Clone, symlink, install plugins:
 
   $ git clone git://github.com/bleything/dotvim.git ~/.vim
   $ ln -s ~/.vim/vimrc ~/.vimrc
+  $ cd ~/.vim && rake install_plugins
 
 == What's Inside?!
 
