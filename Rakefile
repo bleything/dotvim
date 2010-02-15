@@ -12,12 +12,20 @@ require 'pathname'
 DOTVIM = Pathname.new( ENV['HOME'] ) + '.vim'
 
 task :default do
-  puts "run `rake install:plugins` to install plugins"
+  puts "Hi! All this Rakefile can do right now is update the plugins:"
+  puts # blank line
+  puts "  $ rake update:plugins"
 end
 
-namespace :install do
+namespace :update do
 
-  desc "install plugins into ~/.vim/bundle"
+  PLUGINS = {
+    :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
+    :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
+    :fugitive      => "git://github.com/tpope/vim-fugitive.git",
+  }
+
+  desc "update any plugins defined in PLUGINS"
   task :plugins do
     bundle_path = DOTVIM + 'bundle'
     mkdir_p bundle_path
@@ -45,10 +53,5 @@ namespace :install do
     end
   end # task :plugins
 
-end # namespace :install
+end # namespace :update
 
-PLUGINS = {
-  :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
-  :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
-  :fugitive      => "git://github.com/tpope/vim-fugitive.git",
-}
