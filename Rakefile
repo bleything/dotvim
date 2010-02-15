@@ -22,7 +22,7 @@ task :install_plugins do
 
   existing_ignores = File.read( DOTVIM + '.gitignore' ).
     split( /\n/ ).
-    reject {|ignore| ignore =~ %r{vim/bundle} }
+    reject {|ignore| ignore =~ %r{bundle/}}
 
   gitignore = File.open( DOTVIM + '.gitignore', 'w' )
   existing_ignores.each {|i| gitignore.puts i }
