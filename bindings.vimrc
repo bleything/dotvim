@@ -1,6 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """
-""" Ben Bleything's .vimrc
+""" Ben Bleything's Vim Setup
 """ Based on the work of many others. See README.rdoc for credits.
 """
 """ Git Hubs: http://github.com/bleything/dotvim
