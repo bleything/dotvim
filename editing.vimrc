@@ -19,16 +19,19 @@ set showmatch   " flash the matching bracket on inserting a )]} etc
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-""" whitespace settings
-"set cindent      " c-style language indentation
-set smartindent  " automatically indent new lines
-set smarttab     " tab ... smartly?  not sure.
-set shiftwidth=4 " most of the time, we want a shiftwidth of 4
-set tabstop=4    " most of the time, we want a tabstop of 4
-set expandtab    " DIE TABS DIE
+""" FIXME: everything works as expected without these, I'm sure
+"""        that I'm just missing something
+"set cindent    " c-style language indentation
+"set autoindent " automatically indent new lines
+"set smartindent " automatically indent new lines
 
-""" show whitespace
-set list
+" for most code, use 4 space indents. specific filetypes are overridden
+" in filetypes.vimrc
+set softtabstop=4 " most of the time, we want a softtabstop of 4
+set shiftwidth=4  " shift by 4 spaces when using >> and <<, etc
+set expandtab     " no tabs, just spaces kthx.
+
+set list                     " show whitespace
 set listchars=tab:»·,trail:· " show tabs and trailing spaces
 set listchars+=extends:»     " show a » when a line goes off the right
                              " edge of the screen
