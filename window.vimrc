@@ -17,16 +17,21 @@ set winminheight=0 " allow windows to be 0 lines tall
 set winminwidth=0  " allow windows to be 0 lines wide
 set laststatus=2   " always show statusline
 
-" set up statusline
+" set up statusline, ends up looking like this:
+"
+"   [1] window.vimrc [Preview] [vim,+]          0x00 @ l22 c51 (88%)
+"
 set statusline=
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " filename
-set statusline+=%h%m%r%w                     " status flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
-set statusline+=%=                           " right align remainder
-set statusline+=0x%-8B                       " character value
-set statusline+=%-14(%l,%c%V%)               " line, character
-set statusline+=%<%P                         " file position
+set statusline+=%n:\                      " buffer number
+set statusline+=%f                        " filename
+set statusline+=%10w                      " displays [Preview] if it is
+set statusline+=\ [                       " fix spacing, open bracket
+set statusline+=%{strlen(&ft)?&ft:'none'} " filetype
+set statusline+=%M                        " + if modified, - if r/o
+set statusline+=]                         " close bracket
+set statusline+=%=                        " right-align remainder
+set statusline+=0x%02B\                   " character hex value
+set statusline+=@\ L%l\ C%c\ (%P)\        " position in file
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ C O L O R   O P T I O N S
