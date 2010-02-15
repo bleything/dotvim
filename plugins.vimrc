@@ -14,3 +14,7 @@ call pathogen#runtime_append_all_bundles()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ P L U G I N   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" fugitive
+map <leader>gb :Gblame<cr>
+map <leader>gs :Gstatus<cr>

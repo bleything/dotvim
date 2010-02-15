@@ -50,4 +50,5 @@ end # namespace :install
 PLUGINS = {
   :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
   :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
+  :fugitive      => "git://github.com/tpope/vim-fugitive.git",
 }

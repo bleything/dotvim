@@ -1,5 +1,6 @@
 swapfiles/*
 
 # plugins follow
+bundle/fugitive/.git
 bundle/nerdcommenter/.git
 bundle/nerdtree/.git
