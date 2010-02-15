@@ -38,7 +38,8 @@ namespace :install do
 
       rm_rf plugin_path
       sh "git clone #{repo} #{plugin_path} > /dev/null"
-      gitignore.puts plugin_path.relative_path_from( DOTVIM )
+      plugin_dotgit = plugin_path + ".git"
+      gitignore.puts plugin_dotgit.relative_path_from( DOTVIM )
 
       puts # blank line
     end
@@ -48,5 +49,5 @@ end # namespace :install
 
 PLUGINS = {
   :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
-  :nerdtree      => "git://github.com/scrooloose/nerdtree.git"
+  :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
 }
