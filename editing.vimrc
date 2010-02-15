@@ -55,3 +55,8 @@ set smartcase  " overrides ignorecase when the pattern contains
                " upper-case characters
 set hlsearch   " highlights search results
 set incsearch  " incremental search. 'nuf said
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" S W A P   O P T I O N S
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set directory=~/.vim/swapfiles,/var/tmp,/tmp,.
