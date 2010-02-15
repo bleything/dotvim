@@ -12,35 +12,39 @@ require 'pathname'
 DOTVIM = Pathname.new( ENV['HOME'] ) + '.vim'
 
 task :default do
-  puts "run `rake install_plugins` to install plugins"
+  puts "run `rake install:plugins` to install plugins"
 end
 
-desc "install plugins into ~/.vim/bundle"
-task :install_plugins do
-  bundle_path = DOTVIM + 'bundle'
-  mkdir_p bundle_path
+namespace :install do
 
-  existing_ignores = File.read( DOTVIM + '.gitignore' ).
-    split( /\n/ ).
-    reject {|ignore| ignore =~ %r{bundle/}}
+  desc "install plugins into ~/.vim/bundle"
+  task :plugins do
+    bundle_path = DOTVIM + 'bundle'
+    mkdir_p bundle_path
 
-  gitignore = File.open( DOTVIM + '.gitignore', 'w' )
-  existing_ignores.each {|i| gitignore.puts i }
+    existing_ignores = File.read( DOTVIM + '.gitignore' ).
+      split( /\n/ ).
+      reject {|ignore| ignore =~ %r{bundle/}}
 
-  PLUGINS.each do |plugin, repo|
-    plugin_path = bundle_path + plugin.to_s
+    gitignore = File.open( DOTVIM + '.gitignore', 'w' )
+    existing_ignores.each {|i| gitignore.puts i }
 
-    puts "*" * 72
-    puts "*** Instaling #{plugin} to #{plugin_path} from #{repo}"
-    puts # blank line
+    PLUGINS.sort_by {|k,v| k.to_s }.each do |plugin, repo|
+      plugin_path = bundle_path + plugin.to_s
 
-    rm_rf plugin_path
-    sh "git clone #{repo} #{plugin_path} > /dev/null"
-    gitignore.puts plugin_path.relative_path_from( DOTVIM )
+      puts "*" * 72
+      puts "*** Instaling #{plugin} to #{plugin_path} from #{repo}"
+      puts # blank line
 
-    puts # blank line
-  end
-end
+      rm_rf plugin_path
+      sh "git clone #{repo} #{plugin_path} > /dev/null"
+      gitignore.puts plugin_path.relative_path_from( DOTVIM )
+
+      puts # blank line
+    end
+  end # task :plugins
+
+end # namespace :install
 
 PLUGINS = {
   :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
