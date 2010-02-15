@@ -13,3 +13,6 @@ filetype plugin indent on
 
 " ruby files are indented by two
 autocmd FileType ruby set softtabstop=2 shiftwidth=2
+
+" don't show whitespace in help files
+autocmd FileType help set nolist
