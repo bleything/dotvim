@@ -53,7 +53,6 @@ set foldcolumn=2     " adds two columns of fold status on the left-hand
 set ignorecase " makes search patterns case-insensitive by default
 set smartcase  " overrides ignorecase when the pattern contains
                " upper-case characters
-set hlsearch   " highlights search results
 set incsearch  " incremental search. 'nuf said
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
