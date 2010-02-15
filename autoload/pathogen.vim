@@ -1,7 +1,9 @@
 " pathogen.vim - path option manipulation
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 " Version:      1.2
-
+"
+" http://www.vim.org/scripts/script.php?script_id=2332
+"
 " Install in ~/.vim/autoload (or ~\vimfiles\autoload).
 "
 " API is documented below.
