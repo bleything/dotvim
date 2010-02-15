@@ -16,6 +16,9 @@ set number      " show line numbers
 set showbreak=+ " display a + at the beginning of a wrapped line
 set showmatch   " flash the matching bracket on inserting a )]} etc
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
 """ whitespace settings
 "set cindent      " c-style language indentation
 set smartindent  " automatically indent new lines
