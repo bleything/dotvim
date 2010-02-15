@@ -25,11 +25,16 @@ set backspace=indent,eol,start
 "set autoindent " automatically indent new lines
 "set smartindent " automatically indent new lines
 
-" for most code, use 4 space indents. specific filetypes are overridden
-" in filetypes.vimrc
-set softtabstop=4 " most of the time, we want a softtabstop of 4
-set shiftwidth=4  " shift by 4 spaces when using >> and <<, etc
-set expandtab     " no tabs, just spaces kthx.
+" for most stuff, use 4 space indents. specific filetypes are overridden
+" in filetypes.vimrc.
+"
+" Using autocmd for this allows it to be reset every time you open a
+" file, which keeps overrides from being persistent
+"
+" softtabstop is complicated.  :h softtabstop
+" shiftwidth is for >> and <<
+" expandtab uses spaces instead of tabs
+autocmd FileType * set softtabstop=4 shiftwidth=4 expandtab
 
 set list                     " show whitespace
 set listchars=tab:»·,trail:· " show tabs and trailing spaces
