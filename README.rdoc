@@ -11,11 +11,9 @@ Pretty straightforward.  Clone and symlink:
   $ git clone git://github.com/bleything/dotvim.git ~/.vim
   $ ln -s ~/.vim/vimrc ~/.vimrc
 
-Optionally, you may want to update the plugins:
+Optionally, you may want to update the bundles:
 
-  $ cd ~/.vim && rake update:plugins
-
-... note that this command only updates those plugins available via Git.
+  $ cd ~/.vim && rake update:bundles
 
 == What's Inside?!
 
@@ -27,7 +25,10 @@ Also, some plugins:
 * {pathogen.vim}[http://www.vim.org/scripts/script.php?script_id=2332]
 * {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]
 * {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
-* {RDoc Syntax}[http://www.vim.org/scripts/script.php?script_id=2878]
+
+Aaaaaalso, some syntax definitions:
+
+* {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
 
 == Credits
 
