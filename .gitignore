@@ -4,3 +4,4 @@ swapfiles/*
 bundle/fugitive/.git
 bundle/nerdcommenter/.git
 bundle/nerdtree/.git
+bundle/rdoc_syntax/.git

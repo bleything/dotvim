@@ -23,6 +23,7 @@ namespace :update do
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
     :fugitive      => "git://github.com/tpope/vim-fugitive.git",
+    :rdoc_syntax   => "git://github.com/hallison/vim-rdoc.git",
   }
 
   desc "update any plugins defined in PLUGINS"

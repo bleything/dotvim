@@ -27,6 +27,7 @@ Also, some plugins:
 * {pathogen.vim}[http://www.vim.org/scripts/script.php?script_id=2332]
 * {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]
 * {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
+* {RDoc Syntax}[http://www.vim.org/scripts/script.php?script_id=2878]
 
 == Credits
 
