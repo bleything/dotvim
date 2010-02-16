@@ -29,6 +29,7 @@ Also, some plugins:
 Aaaaaalso, some syntax definitions:
 
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
+* {TWiki}[http://www.vim.org/scripts/script.php?script_id=1113]
 
 == Credits
 

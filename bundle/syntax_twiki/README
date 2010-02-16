@@ -1,0 +1,70 @@
+This are syntax and ftplugin-files for vim. It highlights the syntax of TWiki
+(http://www.twiki.org).
+
+One can configure Mozilla to use an external editor for editing
+HTML-edit-boxes. So when one uses vim to edit TWikifiles, he gets his code
+highlighted.
+
+
+Installation:
+~~~~~~~~~~~~~
+Copy syntax/twiki.vim and ftplugin/twiki.vim into ~/.vim/ (or whereever you
+store your own vim-scripts)
+
+
+Configuration:
+~~~~~~~~~~~~~~
+ Customize the behavior of this ftplugin by setting values for the
+ following options in your .vimrc file.
+
+ g:Twiki_FoldAtHeadings
+   This variable, if set to a non-zero value, enables folding on TWiki
+   heading lines.  The fold level is defined by the number of plus-signs in
+   the heading marker.  For example, a line beginning with "---++" sets a
+   fold level of two until the next heading marker in the file.  If not
+   set, the option defaults to off.
+
+ g:Twiki_SourceHTMLSyntax
+   This Variable, if set to a non-zero value, enalbes sourcing of
+   HTLM-Syntax
+
+ g:Twiki_Functions
+   Set this to a nonzero value to use the functions defined ftplugin/twiki.vim
+
+ g:Twiki_Mapings
+   Set this variable to a nonzero value to use mapings defined in ftplugin/twiki.vim
+
+use with MozEx in Firefox/Mozilla:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+http://mozex.mozdev.org
+
+For me, it works as follows: in ~/.vim, edit filetype.vim, it should contain:
+-------------------------------
+augroup filetypedetect
+        au BufNewFile,BufRead *.wiki     setf twiki
+        au BufNewFile,BufRead /tmp/mozex/mozex.textarea*.txt setf twiki
+augroup END
+-------------------------------
+MozEx should be configured to use /tmp/mozex/ for temporary files.
+
+Or, another way is to configure MozEx to use a script for editing Edit-Boxes.
+It should look like the following one (mind the paths):
+-------------------------------
+#!/usr/bin/env bash
+# File: ~/bin/moz_vim
+
+TWIKI_URL="${TWIKI_URL:=https://twiki.org}" # enter your prefered wiki-URL here
+
+ if [ `expr match ${2} ${TWIKI_URL}` -eq ${#TWIKI_URL} ] ; then
+  # starts vim with setting ft to twiki
+  /path/to/vim -geometry 120x60+10+20 -g -c 'set ft=twiki' -f $1
+ else
+  /path/to/vim -geometry 120x60+10+20 -g -f $1
+ fi
+-------------------------------
+This only works with newer Versions of MozEx, that can send the URL as a
+parameter. To use that, your pref.js (somewhere in ~.mozilla) should contain
+the following line:
+-------------------------------
+user_pref("mozex.command.textarea", "~/bin/moz_vim %t %u");
+-------------------------------

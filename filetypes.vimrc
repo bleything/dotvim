@@ -16,3 +16,6 @@ autocmd FileType ruby set softtabstop=2 shiftwidth=2
 
 " don't show whitespace in help files
 autocmd FileType help set nolist
+
+" twiki files
+autocmd BufNewFile,BufRead *.twiki set filetype=twiki
