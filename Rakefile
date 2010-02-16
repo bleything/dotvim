@@ -25,9 +25,10 @@ namespace :update do
     :fugitive      => "git://github.com/tpope/vim-fugitive.git",
 
     # syntax definitions
-    :syntax_rdoc    => "git://github.com/hallison/vim-rdoc.git",
-    :syntax_twiki   => "http://www.vim.org/scripts/download_script.php?src_id=6460",
-    :syntax_textile => "git://github.com/timcharper/textile.vim.git"
+    :syntax_cucumber => "git://github.com/tpope/vim-cucumber.git",
+    :syntax_rdoc     => "git://github.com/hallison/vim-rdoc.git",
+    :syntax_textile  => "git://github.com/timcharper/textile.vim.git",
+    :syntax_twiki    => "http://www.vim.org/scripts/download_script.php?src_id=6460",
   }
 
   desc "update any bundles defined in the Rakefile"
