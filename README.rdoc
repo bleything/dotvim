@@ -29,6 +29,7 @@ Also, some plugins:
 Aaaaaalso, some syntax definitions:
 
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
+* {Textile}[http://www.vim.org/scripts/script.php?script_id=2305]
 * {TWiki}[http://www.vim.org/scripts/script.php?script_id=1113]
 
 == Credits
@@ -46,6 +47,8 @@ Aaaaaalso, some syntax definitions:
 
 [AJ Christensen]   Various tweaks to Adam's config, available on {the git
                    hubs}[http://github.com/fujin/dotvim].
+
+[Other Folks]      The authors of the plugins and syntax defined above.
 
 == Copyright and License
 
