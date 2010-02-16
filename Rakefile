@@ -49,6 +49,7 @@ namespace :update do
       case location.match( /^(.*?):/ )[1]
       when 'git'
         sh "git clone #{location} #{target_path} > /dev/null"
+        rm_rf target_path + '.git'
       when 'http'
         mkdir_p target_path
         sh "cd #{target_path} && curl -s '#{location}' | tar zx -"
