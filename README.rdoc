@@ -6,15 +6,27 @@ below for more details.
 
 == Installation
 
-Pretty straightforward.  Clone, symlink, install plugins:
+Pretty straightforward.  Clone and symlink:
 
   $ git clone git://github.com/bleything/dotvim.git ~/.vim
   $ ln -s ~/.vim/vimrc ~/.vimrc
-  $ cd ~/.vim && rake install_plugins
+
+Optionally, you may want to update the plugins:
+
+  $ cd ~/.vim && rake update:plugins
+
+... note that this command only updates those plugins available via Git.
 
 == What's Inside?!
 
-You know, stuff!
+* My own personal settings, tuned to be super rad
+* The {ir_black}[http://blog.infinitered.com/entries/show/8] color scheme
+
+Also, some plugins:
+
+* {pathogen.vim}[http://www.vim.org/scripts/script.php?script_id=2332]
+* {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]
+* {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
 
 == Credits
 
