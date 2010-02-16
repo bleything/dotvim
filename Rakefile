@@ -48,6 +48,7 @@ namespace :update do
       rm_rf plugin_path
       sh "git clone #{repo} #{plugin_path} > /dev/null"
       plugin_dotgit = plugin_path + ".git"
+      rm_rf plugin_dotgit
       gitignore.puts plugin_dotgit.relative_path_from( DOTVIM )
 
       puts # blank line
