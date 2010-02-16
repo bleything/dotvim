@@ -9,7 +9,6 @@
 ########################################################################
 
 require 'pathname'
-DOTVIM = Pathname.new( ENV['HOME'] ) + '.vim'
 
 task :default do
   puts "Hi! All this Rakefile can do right now is update the plugins:"
@@ -28,15 +27,9 @@ namespace :update do
 
   desc "update any plugins defined in PLUGINS"
   task :plugins do
-    bundle_path = DOTVIM + 'bundle'
+
+    bundle_path = Pathname.new( ENV['HOME'] ) + '.vim' + 'bundle'
     mkdir_p bundle_path
-
-    existing_ignores = File.read( DOTVIM + '.gitignore' ).
-      split( /\n/ ).
-      reject {|ignore| ignore =~ %r{bundle/}}
-
-    gitignore = File.open( DOTVIM + '.gitignore', 'w' )
-    existing_ignores.each {|i| gitignore.puts i }
 
     PLUGINS.sort_by {|k,v| k.to_s }.each do |plugin, repo|
       plugin_path = bundle_path + plugin.to_s
