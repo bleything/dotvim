@@ -18,3 +18,6 @@ call pathogen#runtime_append_all_bundles()
 """ fugitive
 map <leader>gb :Gblame<cr>
 map <leader>gs :Gstatus<cr>
+
+""" NERDTree
+map <leader>d :NERDTreeToggle<cr>
