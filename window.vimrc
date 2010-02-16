@@ -24,6 +24,7 @@ set laststatus=2   " always show statusline
 set statusline=
 set statusline+=%n:\                      " buffer number
 set statusline+=%f                        " filename
+set statusline+=%<                        " truncate here if necessary
 set statusline+=%10w                      " displays [Preview] if it is
 set statusline+=\ [                       " fix spacing, open bracket
 set statusline+=%{strlen(&ft)?&ft:'none'} " filetype
