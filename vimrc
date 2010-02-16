@@ -15,13 +15,13 @@
 """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-source $HOME/.vim/basic.vimrc
-source $HOME/.vim/plugins.vimrc
-source $HOME/.vim/bindings.vimrc
-source $HOME/.vim/window.vimrc
-source $HOME/.vim/editing.vimrc
-source $HOME/.vim/filetypes.vimrc
+source $HOME/.vim/basic
+source $HOME/.vim/plugins
+source $HOME/.vim/bindings
+source $HOME/.vim/window
+source $HOME/.vim/editing
+source $HOME/.vim/filetypes
 
 if has("gui_running")
-    source $HOME/.vim/gui.vimrc
+    source $HOME/.vim/gui
 endif
