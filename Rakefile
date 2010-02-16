@@ -31,18 +31,22 @@ namespace :update do
     bundle_path = Pathname.new( ENV['HOME'] ) + '.vim' + 'bundle'
     mkdir_p bundle_path
 
-    PLUGINS.sort_by {|k,v| k.to_s }.each do |plugin, repo|
+    PLUGINS.sort_by {|k,v| k.to_s }.each do |plugin, location|
       plugin_path = bundle_path + plugin.to_s
 
       puts "*" * 72
-      puts "*** Instaling #{plugin} to #{plugin_path} from #{repo}"
+      puts "*** Instaling #{plugin} to #{plugin_path} from #{location}"
       puts # blank line
 
       rm_rf plugin_path
-      sh "git clone #{repo} #{plugin_path} > /dev/null"
-      plugin_dotgit = plugin_path + ".git"
-      rm_rf plugin_dotgit
-      gitignore.puts plugin_dotgit.relative_path_from( DOTVIM )
+
+      case location.match( /^(.*?):/ )[1]
+      when 'git'
+        sh "git clone #{location} #{plugin_path} > /dev/null"
+      when 'http'
+        mkdir_p plugin_path
+        sh "cd #{plugin_path} && curl -s '#{location}' | tar zx -"
+      end
 
       puts # blank line
     end
