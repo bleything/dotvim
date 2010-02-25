@@ -23,3 +23,4 @@ autocmd BufNewFile,BufRead *.twiki set filetype=twiki
 " set filetype on config files for vim and mutt
 autocmd BufNewFile,BufRead ~/.vim/*  setfiletype vim
 autocmd BufNewFile,BufRead ~/.mutt/* setfiletype muttrc
+autocmd BufNewFile,BufRead ~/.bash/* setfiletype sh
