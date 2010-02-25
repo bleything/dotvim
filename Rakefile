@@ -26,6 +26,7 @@ namespace :update do
 
     # syntax definitions
     :syntax_cucumber => "git://github.com/tpope/vim-cucumber.git",
+    :syntax_markdown => "git://github.com/ujihisa/vim-markdown.git",
     :syntax_rdoc     => "git://github.com/hallison/vim-rdoc.git",
     :syntax_textile  => "git://github.com/timcharper/textile.vim.git",
     :syntax_twiki    => "http://www.vim.org/scripts/download_script.php?src_id=6460",
