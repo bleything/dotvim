@@ -20,9 +20,9 @@ namespace :update do
 
   BUNDLES = {
     # plugins
+    :fugitive      => "git://github.com/tpope/vim-fugitive.git",
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
-    :fugitive      => "git://github.com/tpope/vim-fugitive.git",
 
     # syntax definitions
     :syntax_cucumber => "git://github.com/tpope/vim-cucumber.git",
