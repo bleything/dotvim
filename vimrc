@@ -16,8 +16,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 source $HOME/.vim/basic
-source $HOME/.vim/plugins
 source $HOME/.vim/bindings
+source $HOME/.vim/plugins
 source $HOME/.vim/window
 source $HOME/.vim/editing
 source $HOME/.vim/filetypes
