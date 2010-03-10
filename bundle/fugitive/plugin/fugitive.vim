@@ -56,6 +56,14 @@ function! s:warn(str)
   let v:warningmsg = a:str
 endfunction
 
+function! s:shellslash(path)
+  if exists('+shellslash') && !&shellslash
+    return s:gsub(a:path,'\\','/')
+  else
+    return a:path
+  endif
+endfunction
+
 function! s:add_methods(namespace, method_names) abort
   for name in a:method_names
     let s:{a:namespace}_prototype[name] = s:function('s:'.a:namespace.'_'.name)
@@ -92,10 +100,11 @@ let s:abstract_prototype = {}
 " Initialization {{{1
 
 function! s:ExtractGitDir(path) abort
-  if a:path =~? '^fugitive://.*//'
-    return matchstr(a:path,'fugitive://\zs.\{-\}\ze//')
+  let path = s:shellslash(a:path)
+  if path =~? '^fugitive://.*//'
+    return matchstr(path,'fugitive://\zs.\{-\}\ze//')
   endif
-  let fn = fnamemodify(a:path,':s?[\/]$??')
+  let fn = fnamemodify(path,':s?[\/]$??')
   let ofn = ""
   let nfn = fn
   while fn != ofn
@@ -266,6 +275,7 @@ function! s:repo_superglob(base) dict abort
     if !self.bare()
       let base = s:sub(a:base,'^/','')
       let matches = split(glob(self.tree(s:gsub(base,'/','*&').'*')),"\n")
+      call map(matches,'s:shellslash(v:val)')
       call map(matches,'v:val !~ "/$" && isdirectory(v:val) ? v:val."/" : v:val')
       call map(matches,'v:val[ strlen(self.tree())+(a:base !~ "^/") : -1 ]')
       let results += matches
@@ -295,7 +305,7 @@ call s:add_methods('repo',['dirglob','superglob'])
 
 function! s:repo_keywordprg() dict abort
   let args = ' --git-dir='.escape(self.dir(),"\\\"' ").' show'
-  if has("gui_running")
+  if has('gui_running') && !has('win32')
     return g:fugitive_git_executable . ' --no-pager' . args
   else
     return g:fugitive_git_executable . args
@@ -367,7 +377,7 @@ endfunction
 
 function! s:buffer_name() dict abort
   let bufname = bufname(self['#'])
-  return bufname == '' ? '' : fnamemodify(bufname,':p')
+  return s:shellslash(bufname == '' ? '' : fnamemodify(bufname,':p'))
 endfunction
 
 function! s:buffer_commit() dict abort
@@ -453,7 +463,7 @@ endfunction
 
 function! s:Git(bang,cmd) abort
   let git = s:repo().git_command()
-  if has('gui_running')
+  if has('gui_running') && !has('win32')
     let git .= ' --no-pager'
   endif
   call s:ExecuteInTree('!'.git.' '.a:cmd)
@@ -1149,10 +1159,11 @@ function! s:Blame(bang,line1,line2,count,args) abort
       if a:count
         execute 'write !'.substitute(basecmd,' blame ',' blame -L '.a:line1.','.a:line2.' ','g')
       else
-        let temp = tempname().'.fugitiveblame'
-        silent! exe '%write !'.basecmd.' > '.temp.' 2> '.temp
+        let error = tempname()
+        let temp = error.'.fugitiveblame'
+        silent! exe '%write !'.basecmd.' > '.temp.' 2> '.error
         if v:shell_error
-          call s:throw(join(readfile(temp),"\n"))
+          call s:throw(join(readfile(error),"\n"))
         endif
         let bufnr = bufnr('')
         let restore = 'call setbufvar('.bufnr.',"&scrollbind",0)'
@@ -1282,7 +1293,7 @@ function! s:ReplaceCmd(cmd,...) abort
   finally
     let &autowrite = aw
     if exists('old_index')
-      let $GIT_INDEX_FILE = 'old_index'
+      let $GIT_INDEX_FILE = old_index
     endif
   endtry
   silent exe 'keepalt file '.tmp
