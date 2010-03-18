@@ -474,7 +474,7 @@ function! s:GitComplete(A,L,P) abort
   if !exists('s:exec_path')
     let s:exec_path = s:sub(system(g:fugitive_git_executable.' --exec-path'),'\n$','')
   endif
-  let cmds = map(split(glob(s:exec_path.'/git-*'),"\n"),'v:val[strlen(s:exec_path)+5 : -1]')
+  let cmds = map(split(glob(s:exec_path.'/git-*'),"\n"),'s:sub(v:val[strlen(s:exec_path)+5 : -1],"\\.exe$","")')
   if a:L =~ ' [[:alnum:]-]\+ '
     return s:repo().superglob(a:A)
   elseif a:A == ''
@@ -670,7 +670,7 @@ function! s:Commit(args) abort
       let error = get(readfile(errorfile,'',1),0,'!')
       if error =~# "'false'\\.$"
         let args = a:args
-        let args = s:gsub(args,'%(%(^| )-- )@<!%(^| )@<=%(-e|--edit|--interactive)%($| )','')
+        let args = s:gsub(args,'%(%(^| )-- )@<!%(^| )@<=%(-[se]|--edit|--interactive)%($| )','')
         let args = s:gsub(args,'%(%(^| )-- )@<!%(^| )@<=%(-F|--file|-m|--message)%(\s+|\=)%(''[^'']*''|"%(\\.|[^"])*"|\\.|\S)*','')
         let args = s:gsub(args,'%(^| )@<=[%#]%(:\w)*','\=expand(submatch(0))')
         let args = '-F '.s:shellesc(msgfile).' '.args
@@ -728,7 +728,7 @@ endfunction
 
 augroup fugitive_commit
   autocmd!
-  autocmd BufDelete *.git/COMMIT_EDITMSG execute s:sub(s:FinishCommit(), '^echoerr (.*)', 'echohl ErrorMsg|echo \1|echohl NONE')
+  autocmd VimLeavePre,BufDelete *.git/COMMIT_EDITMSG execute s:sub(s:FinishCommit(), '^echoerr (.*)', 'echohl ErrorMsg|echo \1|echohl NONE')
 augroup END
 
 " }}}1
