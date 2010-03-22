@@ -21,3 +21,7 @@ map <C-H> <C-W>h<C-W><BAR>
 map <C-L> <C-W>l<C-W><BAR>
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
+
+" quick buffer switching
+map <leader>[ :bprevious<CR>
+map <leader>] :bnext<CR>
