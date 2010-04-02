@@ -20,7 +20,6 @@ namespace :update do
 
   BUNDLES = {
     # plugins
-    :fugitive      => "git://github.com/tpope/vim-fugitive.git",
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
     :tabular       => "git://github.com/godlygeek/tabular",
