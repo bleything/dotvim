@@ -18,3 +18,7 @@ map <leader>gs :Gstatus<cr>
 
 """ NERDTree
 map <leader>d :NERDTreeToggle<cr>
+
+""" Tabular
+" sets ,t to align = and => lines
+map <leader>t :Tabularize /=>\?<cr>
