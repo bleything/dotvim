@@ -22,6 +22,7 @@ Optionally, you may want to update the bundles:
 
 Also, some plugins:
 
+* {Buffer Explorer}[http://www.vim.org/scripts/script.php?script_id=42]
 * {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]
 * {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
 * {Pathogen}[http://www.vim.org/scripts/script.php?script_id=2332]

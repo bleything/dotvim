@@ -12,9 +12,10 @@
 """ P L U G I N   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""" fugitive
-map <leader>gb :Gblame<cr>
-map <leader>gs :Gstatus<cr>
+""" bufexplorer
+let g:bufExplorerDetailedHelp=1     " show full help text by default
+" let g:bufExplorerShowRelativePath=1 " use relative paths
+let g:bufExplorerShowUnlisted=1     " display unlisted buffers
 
 """ NERDCommenter
 let NERDCreateDefaultMappings=0 " disable default mappings

@@ -20,6 +20,7 @@ namespace :update do
 
   BUNDLES = {
     # plugins
+    :bufexplorer   => "http://www.vim.org/scripts/download_script.php?src_id=12363",
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
     :tabular       => "git://github.com/godlygeek/tabular",
