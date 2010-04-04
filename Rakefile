@@ -57,6 +57,12 @@ namespace :update do
         sh "cd #{target_path} && curl -s '#{location}' | tar zx -"
       end
 
+      docdir = target_path + 'doc'
+      if docdir.exist?
+        puts "doc dir exists; tagging"
+        sh "vim -u NONE -esX -c 'helptags #{docdir}' -c quit"
+      end
+
       puts # blank line
     end
   end # task :bundles
