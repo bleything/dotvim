@@ -31,6 +31,7 @@ Also, some plugins:
 Aaaaaalso, some syntax definitions:
 
 * {Cucumber}[http://www.vim.org/scripts/script.php?script_id=2973]
+* {Git}[http://www.vim.org/scripts/script.php?script_id=1654]
 * {Markdown}[http://github.com/ujihisa/vim-markdown]
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
 * {Textile}[http://www.vim.org/scripts/script.php?script_id=2305]
