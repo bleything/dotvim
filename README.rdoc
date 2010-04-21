@@ -34,6 +34,7 @@ Aaaaaalso, some syntax definitions:
 * {Git}[http://www.vim.org/scripts/script.php?script_id=1654]
 * {Markdown}[http://github.com/ujihisa/vim-markdown]
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
+* {Slidedown}[http://www.vim.org/scripts/script.php?script_id=3069]
 * {Textile}[http://www.vim.org/scripts/script.php?script_id=2305]
 * {Twiki}[http://www.vim.org/scripts/script.php?script_id=1113]
 

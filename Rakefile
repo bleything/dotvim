@@ -26,12 +26,13 @@ namespace :update do
     :tabular       => "git://github.com/godlygeek/tabular",
 
     # syntax definitions
-    :syntax_cucumber => "git://github.com/tpope/vim-cucumber.git",
-    :syntax_git      => "git://github.com/tpope/vim-git.git",
-    :syntax_markdown => "git://github.com/ujihisa/vim-markdown.git",
-    :syntax_rdoc     => "git://github.com/hallison/vim-rdoc.git",
-    :syntax_textile  => "git://github.com/timcharper/textile.vim.git",
-    :syntax_twiki    => "http://www.vim.org/scripts/download_script.php?src_id=6460",
+    :syntax_cucumber  => "git://github.com/tpope/vim-cucumber.git",
+    :syntax_git       => "git://github.com/tpope/vim-git.git",
+    :syntax_markdown  => "git://github.com/ujihisa/vim-markdown.git",
+    :syntax_rdoc      => "git://github.com/hallison/vim-rdoc.git",
+    :syntax_slidedown => "git://github.com/bleything/vim-slidedown.git",
+    :syntax_textile   => "git://github.com/timcharper/textile.vim.git",
+    :syntax_twiki     => "http://www.vim.org/scripts/download_script.php?src_id=6460",
   }
 
   desc "update any bundles defined in the Rakefile"
