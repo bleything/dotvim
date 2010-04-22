@@ -24,6 +24,7 @@ namespace :update do
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
     :tabular       => "git://github.com/godlygeek/tabular",
+    :taglist       => "http://www.vim.org/scripts/download_script.php?src_id=7701",
 
     # syntax definitions
     :syntax_cucumber  => "git://github.com/tpope/vim-cucumber.git",
