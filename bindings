@@ -25,3 +25,6 @@ map <C-K> <C-W>k<C-W>_
 " quick buffer switching
 map <leader>[ :bprevious<CR>
 map <leader>] :bnext<CR>
+
+" shortcut to compile/run the current file
+map <leader>r :w<CR>:make %<CR>

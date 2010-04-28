@@ -17,6 +17,9 @@ filetype plugin indent on
 " ruby files are indented by two
 autocmd FileType ruby,rdoc,cucumber set softtabstop=2 shiftwidth=2
 
+" set up compiler for ruby files
+autocmd FileType ruby compiler ruby
+
 " don't show whitespace in help files
 autocmd FileType help set nolist
 
