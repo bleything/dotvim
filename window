@@ -38,4 +38,4 @@ set statusline+=@\ L%l\ C%c\ (%P)\        " position in file
 """ C O L O R   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark " use colors suitable for dark backgrounds
-colorscheme desert  " shut up, I like desert.
+colorscheme torte
