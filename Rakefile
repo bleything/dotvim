@@ -23,6 +23,7 @@ namespace :update do
     :bufexplorer   => "http://www.vim.org/scripts/download_script.php?src_id=12363",
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
+    :surround      => "git://github.com/tpope/vim-surround.git",
     :tabular       => "git://github.com/godlygeek/tabular",
     :taglist       => "http://www.vim.org/scripts/download_script.php?src_id=7701",
 
