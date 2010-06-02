@@ -28,3 +28,6 @@ map <leader>] :bnext<CR>
 
 " shortcut to compile/run the current file
 map <leader>r :w<CR>:make %<CR>
+
+" shortcut to strip trailing whitespace
+map <leader>s :s/ \+$//g<CR>
