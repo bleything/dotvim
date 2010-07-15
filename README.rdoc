@@ -26,6 +26,7 @@ Also, some plugins:
 * {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]
 * {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
 * {Pathogen}[http://www.vim.org/scripts/script.php?script_id=2332]
+* {Rails}[http://www.vim.org/scripts/script.php?script_id=1567]
 * {Surround.vim}[http://www.vim.org/scripts/script.php?script_id=1697]
 * {Tabular}[http://github.com/godlygeek/tabular]
 * {Taglist}[http://www.vim.org/scripts/script.php?script_id=273]
