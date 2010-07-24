@@ -1849,7 +1849,7 @@ function! s:RailsFind()
   let res = s:findit('\v<File.dirname\(__FILE__\)\s*\+\s*[:'."'".'"](\f+)>['."'".'"]=',expand('%:h').'\1')
   if res != ""|return res|endif
 
-  let res = rails#underscore(s:findit('\v\s*<%(include|extend)\(=\s*<(\f+)>','\1'))
+  let res = rails#underscore(s:findit('\v\s*<%(include|extend)\(=\s*<([[:alnum:]_:]+)>','\1'))
   if res != ""|return res.".rb"|endif
 
   let res = s:findamethod('require','\1')
@@ -2281,6 +2281,7 @@ function! s:integrationtestList(A,L,P)
     let found += rails#app().relglob("test/integration/","**/*","_test.rb")
   endif
   if rails#app().has('spec')
+    let found += rails#app().relglob("spec/requests/","**/*","_spec.rb")
     let found += rails#app().relglob("spec/integration/","**/*","_spec.rb")
   endif
   if rails#app().has('cucumber')
@@ -2703,10 +2704,10 @@ function! s:integrationtestEdit(cmd,...)
   else
     let cmd = s:findcmdfor(a:cmd)
   endif
-  let mapping = {'test': ['test/integration/','_test.rb'], 'spec': ['spec/integration/','_spec.rb'], 'cucumber': ['features/','.feature']}
-  let tests = map(filter(rails#app().test_suites(),'has_key(mapping,v:val)'),'get(mapping,v:val)')
+  let tests = [['test/integration/','_test.rb'], [ 'spec/requests/','_spec.rb'], [ 'spec/integration/','_spec.rb'], [ 'features/','.feature']]
+  call filter(tests, 'isdirectory(rails#app().path(v:val[0]))')
   if empty(tests)
-    let tests = [mapping['test']]
+    let tests = [['test/integration/','_test.rb']]
   endif
   for [prefix, suffix] in tests
     if rails#app().has_file(prefix.f.suffix)
@@ -3541,7 +3542,8 @@ function! s:BufSyntax()
           syn keyword rubyRailsTestControllerMethod assert_response assert_redirected_to assert_template assert_recognizes assert_generates assert_routing assert_dom_equal assert_dom_not_equal assert_select assert_select_rjs assert_select_encoded assert_select_email assert_tag assert_no_tag
         endif
       elseif buffer.type_name('spec')
-        syn keyword rubyRailsTestMethod describe context it its specify shared_examples_for it_should_behave_like let before after subject fixtures controller_name helper_name
+        syn keyword rubyRailsTestMethod describe context it its specify shared_examples_for it_should_behave_like before after subject fixtures controller_name helper_name
+        syn match rubyRailsTestMethod '\<let\>!\='
         syn keyword rubyRailsTestMethod violated pending expect double mock mock_model stub_model
         syn match rubyRailsTestMethod '\.\@<!\<stub\>!\@!'
         if !buffer.type_name('spec-model')
@@ -4560,7 +4562,7 @@ function! s:SetBasePath()
     let path += ['test', 'test/unit', 'test/functional', 'test/integration']
   endif
   if self.app().has('spec')
-    let path += ['spec', 'spec/models', 'spec/controllers', 'spec/helpers', 'spec/views', 'spec/lib', 'spec/integration']
+    let path += ['spec', 'spec/models', 'spec/controllers', 'spec/helpers', 'spec/views', 'spec/lib', 'spec/requests', 'spec/integration']
   endif
   let path += ['app/*', 'vendor', 'vendor/plugins/*/lib', 'vendor/plugins/*/test', 'vendor/rails/*/lib', 'vendor/rails/*/test']
   call map(path,'self.app().path(v:val)')
