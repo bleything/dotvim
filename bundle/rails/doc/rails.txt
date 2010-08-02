@@ -314,7 +314,6 @@ Suggestions for further contexts to consider for the alternate file, related
 file, and file under the cursor are welcome.  They are subtly tweaked from
 release to release.
 
-
 File Type Navigation Commands ~
 						*rails-type-navigation*
 For the less common cases, a more deliberate set of commands are provided.
@@ -525,9 +524,10 @@ Rake integration happens through the :Rake command.
 						*rails-:Rake*
 :[range]Rake {targets}	Calls |:make!| {targets} (with 'makeprg' being rake)
 			and opens the quickfix window if there were any
-			errors.  If {targets} are omitted, :Rake defaults to
-			something sensible as described below.  Giving a line
-			number argument may affect that default.
+			errors.  An argument of "-" reruns the last task.  If
+			{targets} are omitted, :Rake defaults to something
+			sensible as described below.  Giving a line number
+			argument may affect that default.
 
 						*rails-:Rake!*
 :[range]Rake! {targets}	Called with a bang, :Rake will forgo opening the
