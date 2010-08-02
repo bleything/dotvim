@@ -18,6 +18,8 @@ Optionally, you may want to update the bundles:
 == What's Inside?!
 
 * My own personal settings, tuned to be super rad
+* The {candycode}[http://www.vim.org/scripts/script.php?script_id=1635] color scheme
+* The {deveiate}[http://www.vim.org/scripts/script.php?script_id=2277] color scheme
 * The {ir_black}[http://blog.infinitered.com/entries/show/8] color scheme
 
 Also, some plugins:
@@ -27,7 +29,7 @@ Also, some plugins:
 * {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
 * {Pathogen}[http://www.vim.org/scripts/script.php?script_id=2332]
 * {Rails}[http://www.vim.org/scripts/script.php?script_id=1567]
-* {Surround.vim}[http://www.vim.org/scripts/script.php?script_id=1697]
+* {Surround}[http://www.vim.org/scripts/script.php?script_id=1697]
 * {Tabular}[http://github.com/godlygeek/tabular]
 * {Taglist}[http://www.vim.org/scripts/script.php?script_id=273]
 
