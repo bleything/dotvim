@@ -40,6 +40,7 @@ Aaaaaalso, some syntax definitions:
 * {Git}[http://www.vim.org/scripts/script.php?script_id=1654]
 * {JSON}[http://www.vim.org/scripts/script.php?script_id=1945]
 * {Markdown}[http://github.com/ujihisa/vim-markdown]
+* {nginx}[http://www.vim.org/scripts/script.php?script_id=1886]
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
 * {Slidedown}[http://www.vim.org/scripts/script.php?script_id=3069]
 * {Textile}[http://www.vim.org/scripts/script.php?script_id=2305]
