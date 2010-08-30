@@ -722,6 +722,8 @@ function! s:readable_calculate_file_type() dict abort
     let r = "stylesheet-".e
   elseif e == "js"
     let r = "javascript"
+  elseif e == "coffee"
+    let r = "javascript-coffee"
   elseif e == "html"
     let r = e
   elseif f =~ '\<config/routes\>.*\.rb$'
@@ -774,7 +776,8 @@ function! s:app_has(feature) dict
         \'spec': 'spec/',
         \'cucumber': 'features/',
         \'sass': 'public/stylesheets/sass/',
-        \'lesscss': 'app/stylesheets/'}
+        \'lesscss': 'app/stylesheets/',
+        \'coffee': 'app/scripts/'}
   if self.cache.needs('features')
     call self.cache.set('features',{})
   endif
@@ -924,7 +927,7 @@ function! s:BufCommands()
   let ext = expand("%:e")
   if ext =~ s:viewspattern()
     " TODO: complete controller names with trailing slashes here
-    command! -buffer -bar -nargs=? -range -complete=customlist,s:controllerList Rextract :<line1>,<line2>call s:Extract(<bang>0,<f-args>)
+    command! -buffer -bar -bang -nargs=? -range -complete=customlist,s:controllerList Rextract :<line1>,<line2>call s:Extract(<bang>0,<f-args>)
   endif
   if RailsFilePath() =~ '\<db/migrate/.*\.rb$'
     command! -buffer -bar                 Rinvert  :call s:Invert(<bang>0)
@@ -1282,8 +1285,10 @@ function! s:readable_default_rake_task(lnum) dict abort
     else
       return 'routes CONTROLLER='.self.controller_name()
     endif
-  elseif app.has('spec') && self.name() =~# '^app/.*\.rb' && app.has_file(s:sub(self.name(),'^app/(.*)\.rb$','spec/\1_spec.rb'))
+  elseif app.has('spec') && self.name() =~# '^app/.*\.\w\+$' && app.has_file(s:sub(self.name(),'^app/(.*)\.\w\+$','spec/\1_spec.rb'))
     return 'spec SPEC="'.fnamemodify(s:sub(self.name(),'<app/','spec/'),':p:r').'_spec.rb"'
+  elseif app.has('spec') && self.name() =~# '^app/.*\.\w\+$' && app.has_file(s:sub(self.name(),'^app/(.*)$','spec/\1_spec.rb'))
+    return 'spec SPEC="'.fnamemodify(s:sub(self.name(),'<app/','spec/'),':p').'_spec.rb"'
   elseif self.type_name('model')
     return 'test:units TEST="'.fnamemodify(s:sub(self.name(),'<app/models/','test/unit/'),':p:r').'_test.rb"'
   elseif self.type_name('api','mailer')
@@ -1365,6 +1370,8 @@ function! s:readable_preview_urls(lnum) dict abort
     let urls = urls + [s:sub(self.name(),'^public','')]
   elseif self.name() =~ '^app/stylesheets/'
     let urls = urls + [s:sub(s:sub(self.name(),'^app/stylesheets/','/stylesheets/'),'\.less$','.css')]
+  elseif self.name() =~ '^app/scripts/'
+    let urls = urls + [s:sub(s:sub(self.name(),'^app/scripts/','/javascripts/'),'\.coffee$','.js')]
   elseif self.controller_name() != '' && self.controller_name() != 'application'
     if self.type_name('controller') && self.last_method(a:lnum) != ''
       let urls += ['/'.self.controller_name().'/'.self.last_method(a:lnum).'/']
@@ -2644,7 +2651,14 @@ function! s:stylesheetEdit(cmd,...)
 endfunction
 
 function! s:javascriptEdit(cmd,...)
-  return s:EditSimpleRb(a:cmd,"javascript",a:0? a:1 : "application","public/javascripts/",".js",1)
+  let name = a:0 ? a:1 : s:controller(1)
+  if rails#app().has('coffee') && rails#app().has_file('app/scripts/'.name.'.coffee')
+    return s:EditSimpleRb(a:cmd,'javascript',name,'app/scripts/','.coffee',1)
+  elseif rails#app().has('coffee') && rails#app().has_file('app/scripts/'.name.'.js')
+    return s:EditSimpleRb(a:cmd,'javascript',name,'app/scripts/','.js',1)
+  else
+    return s:EditSimpleRb(a:cmd,'javascript',name,'public/javascripts/','.js',1)
+  endif
 endfunction
 
 function! s:unittestEdit(cmd,...)
@@ -3160,15 +3174,8 @@ function! s:Extract(bang,...) range abort
   else
     let out = (rails_root)."/app/views/".dir."/_".fname
   endif
-  if filereadable(out)
-    let partial_warn = 1
-  endif
-  if bufnr(out) > 0
-    if bufloaded(out)
-      return s:error("Partial already open in buffer ".bufnr(out))
-    else
-      exe "bwipeout ".bufnr(out)
-    endif
+  if filereadable(out) && !a:bang
+    return s:error('E13: File exists (add ! to override)')
   endif
   " No tabs, they'll just complicate things
   if ext =~? '^\%(rhtml\|erb\|dryml\)$'
@@ -3229,13 +3236,9 @@ function! s:Extract(bang,...) range abort
     norm ^5w
   endif
   let ft = &ft
-  if &hidden
-    enew
-  else
-    new
-  endif
   let shortout = fnamemodify(out,':.')
-  silent file `=shortout`
+  silent split `=shortout`
+  silent %delete
   let &ft = ft
   let @@ = partial
   silent put
@@ -3246,10 +3249,6 @@ function! s:Extract(bang,...) range abort
   endif
   silent! exe '%substitute?\%(\w\|[@:"'."'".'-]\)\@<!'.var.'\>?'.name.'?g'
   1
-  call RailsBufInit(rails_root)
-  if exists("l:partial_warn")
-    call s:warn("Warning: partial exists!")
-  endif
 endfunction
 
 " }}}1
@@ -3431,24 +3430,24 @@ endfunction
 function! s:helpermethods()
   return ""
         \."atom_feed audio_path audio_tag auto_discovery_link_tag auto_link "
-        \."benchmark button_to button_to_function button_to_remote "
+        \."button_to button_to_function "
         \."cache capture cdata_section check_box check_box_tag collection_select concat content_for content_tag content_tag_for csrf_meta_tag current_cycle cycle "
         \."date_select datetime_select debug distance_of_time_in_words distance_of_time_in_words_to_now div_for dom_class dom_id draggable_element draggable_element_js drop_receiving_element drop_receiving_element_js "
-        \."error_message_on error_messages_for escape_javascript escape_once evaluate_remote_response excerpt "
-        \."field_set_tag fields_for file_field file_field_tag form form_for form_remote_for form_remote_tag form_tag "
+        \."email_field email_field_tag error_message_on error_messages_for escape_javascript escape_once excerpt "
+        \."favicon_link_tag field_set_tag fields_for file_field file_field_tag form form_for form_tag "
         \."grouped_collection_select grouped_options_for_select "
         \."hidden_field hidden_field_tag highlight "
         \."image_path image_submit_tag image_tag input "
         \."javascript_cdata_section javascript_include_tag javascript_path javascript_tag "
-        \."l label label_tag link_to link_to_function link_to_if link_to_remote link_to_unless link_to_unless_current localize "
-        \."mail_to markdown "
-        \."number_to_currency number_to_human_size number_to_percentage number_to_phone number_with_delimiter number_with_precision "
-        \."observe_field observe_form option_groups_from_collection_for_select options_for_select options_from_collection_for_select "
-        \."partial_path password_field password_field_tag path_to_audio path_to_image path_to_javascript path_to_stylesheet path_to_video periodically_call_remote pluralize "
-        \."radio_button radio_button_tag raw remote_form_for remote_function reset_cycle "
-        \."safe_concat sanitize sanitize_css select select_date select_datetime select_day select_hour select_minute select_month select_second select_tag select_time select_year simple_format sortable_element sortable_element_js strip_links strip_tags stylesheet_link_tag stylesheet_path submit_tag submit_to_remote "
-        \."t tag text_area text_area_tag text_field text_field_tag textilize textilize_without_paragraph time_ago_in_words time_select time_zone_options_for_select time_zone_select translate truncate "
-        \."update_page update_page_tag url_for "
+        \."l label label_tag link_to link_to_function link_to_if link_to_unless link_to_unless_current localize "
+        \."mail_to "
+        \."number_field number_field_tag number_to_currency number_to_human number_to_human_size number_to_percentage number_to_phone number_with_delimiter number_with_precision "
+        \."option_groups_from_collection_for_select options_for_select options_from_collection_for_select "
+        \."password_field password_field_tag path_to_audio path_to_image path_to_javascript path_to_stylesheet path_to_video phone_field phone_field_tag pluralize "
+        \."radio_button radio_button_tag range_field range_field_tag raw remote_function reset_cycle "
+        \."safe_concat sanitize sanitize_css search_field search_field_tag select select_date select_datetime select_day select_hour select_minute select_month select_second select_tag select_time select_year simple_format sortable_element sortable_element_js strip_links strip_tags stylesheet_link_tag stylesheet_path submit_tag "
+        \."t tag telephone_field telephone_field_tag text_area text_area_tag text_field text_field_tag time_ago_in_words time_select time_zone_options_for_select time_zone_select translate truncate "
+        \."update_page update_page_tag url_field url_field_tag url_for url_options "
         \."video_path video_tag visual_effect "
         \."word_wrap"
 endfunction
@@ -3502,6 +3501,8 @@ function! s:BufSyntax()
         syn keyword rubyRailsARAssociationMethod belongs_to has_one has_many has_and_belongs_to_many composed_of accepts_nested_attributes_for
         syn keyword rubyRailsARCallbackMethod before_create before_destroy before_save before_update before_validation before_validation_on_create before_validation_on_update
         syn keyword rubyRailsARCallbackMethod after_create after_destroy after_save after_update after_validation after_validation_on_create after_validation_on_update
+        syn keyword rubyRailsARCallbackMethod around_create around_destroy around_save around_update
+        syn keyword rubyRailsARCallbackMethod after_commit after_find after_initialize after_rollback after_touch
         syn keyword rubyRailsARClassMethod attr_accessible attr_protected establish_connection set_inheritance_column set_locking_column set_primary_key set_sequence_name set_table_name
         syn keyword rubyRailsARValidationMethod validate validates validate_on_create validate_on_update validates_acceptance_of validates_associated validates_confirmation_of validates_each validates_exclusion_of validates_format_of validates_inclusion_of validates_length_of validates_numericality_of validates_presence_of validates_size_of validates_uniqueness_of
         syn keyword rubyRailsMethod logger
@@ -3602,30 +3603,30 @@ function! s:BufSyntax()
       syn cluster htmlArgCluster add=@rubyStringSpecial
       syn cluster htmlPreProc    add=@rubyStringSpecial
 
-    elseif &syntax == "eruby" || &syntax == "haml"
+    elseif &syntax == 'eruby' || &syntax == 'haml'
       syn case match
       if classes != ''
-        exe "syn keyword erubyRailsUserClass ".classes." contained containedin=@erubyRailsRegions"
+        exe 'syn keyword '.&syntax.'RailsUserClass '.classes.' contained containedin=@'.&syntax.'RailsRegions'
       endif
-      if &syntax == "haml"
-        syn cluster erubyRailsRegions contains=hamlRubyCodeIncluded,hamlRubyCode,hamlRubyHash,@hamlEmbeddedRuby,rubyInterpolation
+      if &syntax == 'haml'
+        exe 'syn cluster hamlRailsRegions contains=hamlRubyCodeIncluded,hamlRubyCode,hamlRubyHash,@hamlEmbeddedRuby,rubyInterpolation'
       else
-        syn cluster erubyRailsRegions contains=erubyOneLiner,erubyBlock,erubyExpression,rubyInterpolation
+        exe 'syn cluster erubyRailsRegions contains=erubyOneLiner,erubyBlock,erubyExpression,rubyInterpolation'
       endif
-      exe "syn keyword erubyRailsHelperMethod ".s:gsub(s:helpermethods(),'<%(content_for|select)\s+','')." contained containedin=@erubyRailsRegions"
-      syn match erubyRailsHelperMethod '\<select\>\%(\s*{\|\s*do\>\|\s*(\=\s*&\)\@!' contained containedin=@erubyRailsRegions
-      syn match erubyRailsHelperMethod '\<\%(content_for?\=\|current_page?\)' contained containedin=@erubyRailsRegions
-      syn keyword erubyRailsMethod debugger logger contained containedin=@erubyRailsRegions
-      syn keyword erubyRailsMethod params request response session headers cookies flash contained containedin=@erubyRailsRegions
-      syn match erubyRailsViewMethod '\.\@<!\<\(h\|html_escape\|u\|url_encode\|controller\)\>' contained containedin=@erubyRailsRegions
+      exe 'syn keyword '.&syntax.'RailsHelperMethod '.s:gsub(s:helpermethods(),'<%(content_for|select)\s+','').' contained containedin=@'.&syntax.'RailsRegions'
+      exe 'syn match '.&syntax.'RailsHelperMethod "\<select\>\%(\s*{\|\s*do\>\|\s*(\=\s*&\)\@!" contained containedin=@'.&syntax.'RailsRegions'
+      exe 'syn match '.&syntax.'RailsHelperMethod "\<\%(content_for?\=\|current_page?\)" contained containedin=@'.&syntax.'RailsRegions'
+      exe 'syn keyword '.&syntax.'RailsMethod debugger logger contained containedin=@'.&syntax.'RailsRegions'
+      exe 'syn keyword '.&syntax.'RailsMethod params request response session headers cookies flash contained containedin=@'.&syntax.'RailsRegions'
+      exe 'syn match '.&syntax.'RailsViewMethod "\.\@<!\<\(h\|html_escape\|u\|url_encode\|controller\)\>" contained containedin=@'.&syntax.'RailsRegions'
       if buffer.type_name('view-partial')
-        syn keyword erubyRailsMethod local_assigns contained containedin=@erubyRailsRegions
+        exe 'syn keyword '.&syntax.'RailsMethod local_assigns contained containedin=@'.&syntax.'RailsRegions'
       endif
-      syn keyword erubyRailsRenderMethod render contained containedin=@erubyRailsRegions
-      syn case match
+      exe 'syn keyword '.&syntax.'RailsRenderMethod render contained containedin=@'.&syntax.'RailsRegions'
+      exe 'syn case match'
       set isk+=$
-      exe "syn keyword javascriptRailsFunction contained ".s:javascript_functions
-      syn cluster htmlJavaScript add=javascriptRailsFunction
+      exe 'syn keyword javascriptRailsFunction contained '.s:javascript_functions
+      exe 'syn cluster htmlJavaScript add=javascriptRailsFunction'
     elseif &syntax == "yaml"
       syn case match
       " Modeled after syntax/eruby.vim
@@ -3648,7 +3649,7 @@ function! s:BufSyntax()
       set isk+=$
       exe "syn keyword javascriptRailsFunction contained ".s:javascript_functions
       syn cluster htmlJavaScript add=javascriptRailsFunction
-    elseif &syntax == "javascript"
+    elseif &syntax == "javascript" || &syntax == "coffee"
       " The syntax file included with Vim incorrectly sets syn case ignore.
       syn case match
       set isk+=$
@@ -3684,8 +3685,14 @@ function! s:HiDefaults()
   hi def link erubyRailsRenderMethod          erubyRailsMethod
   hi def link erubyRailsMethod                railsMethod
   hi def link erubyRailsUserMethod            railsUserMethod
-  hi def link railsUserMethod                 railsMethod
   hi def link erubyRailsUserClass             railsUserClass
+  hi def link hamlRailsHelperMethod           hamlRailsMethod
+  hi def link hamlRailsViewMethod             hamlRailsMethod
+  hi def link hamlRailsRenderMethod           hamlRailsMethod
+  hi def link hamlRailsMethod                 railsMethod
+  hi def link hamlRailsUserMethod             railsUserMethod
+  hi def link hamlRailsUserClass              railsUserClass
+  hi def link railsUserMethod                 railsMethod
   hi def link yamlRailsDelimiter              Delimiter
   hi def link yamlRailsMethod                 railsMethod
   hi def link yamlRailsComment                Comment
@@ -4707,7 +4714,7 @@ augroup railsPluginAuto
   autocmd BufWritePost */tasks/**.rake            call rails#cache_clear("rake_tasks")
   autocmd BufWritePost */generators/**            call rails#cache_clear("generators")
   autocmd FileType * if exists("b:rails_root") | call s:BufSettings() | endif
-  autocmd Syntax ruby,eruby,yaml,haml,javascript,railslog if exists("b:rails_root") | call s:BufSyntax() | endif
+  autocmd Syntax ruby,eruby,yaml,haml,javascript,coffee,railslog if exists("b:rails_root") | call s:BufSyntax() | endif
   autocmd QuickFixCmdPre  make* call s:push_chdir()
   autocmd QuickFixCmdPost make* call s:pop_command()
 augroup END
