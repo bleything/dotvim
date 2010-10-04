@@ -27,6 +27,7 @@ namespace :update do
     :surround      => "git://github.com/tpope/vim-surround.git",
     :tabular       => "git://github.com/godlygeek/tabular",
     :taglist       => "http://www.vim.org/scripts/download_script.php?src_id=7701",
+    :taskpaper     => "git://github.com/davidoc/taskpaper.vim.git",
 
     # syntax definitions
     :syntax_git       => "git://github.com/tpope/vim-git.git",

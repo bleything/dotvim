@@ -33,6 +33,7 @@ Also, some plugins:
 * {Surround}[http://www.vim.org/scripts/script.php?script_id=1697]
 * {Tabular}[http://github.com/godlygeek/tabular]
 * {Taglist}[http://www.vim.org/scripts/script.php?script_id=273]
+* {Taskpaper.vim}[http://www.vim.org/scripts/script.php?script_id=2027]
 
 Aaaaaalso, some syntax definitions:
 
