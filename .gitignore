@@ -1,4 +1,5 @@
 swapfiles/*
+undofiles/*
 
 # plugins follow
 bundle/fugitive/.git

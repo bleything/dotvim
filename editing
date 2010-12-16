@@ -61,6 +61,12 @@ set smartcase  " overrides ignorecase when the pattern contains
 set incsearch  " incremental search. 'nuf said
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" S W A P   O P T I O N S
+""" S W A P   A N D   U N D O   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set directory=~/.vim/swapfiles,/var/tmp,/tmp,.
+
+" enable persistent undo
+if has("persistent_undo")
+    set undofile
+    set undodir=~/.vim/undofiles,/var/tmp,/tmp,.
+endif
