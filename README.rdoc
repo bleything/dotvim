@@ -38,6 +38,7 @@ Also, some plugins:
 Aaaaaalso, some syntax definitions:
 
 * {Git}[http://www.vim.org/scripts/script.php?script_id=1654]
+* {HAML/SASS}[http://www.vim.org/scripts/script.php?script_id=1433]
 * {JSON}[http://www.vim.org/scripts/script.php?script_id=1945]
 * {Markdown}[http://github.com/ujihisa/vim-markdown]
 * {nginx}[http://www.vim.org/scripts/script.php?script_id=1886]
