@@ -31,3 +31,11 @@ map <leader>r :w<CR>:make %<CR>
 
 " shortcut to strip trailing whitespace
 map <leader>s :s/\s\+$//g<CR>
+
+" fold helpers:
+"   Tab: toggle fold state
+"   Shift-Tab: toggle state of outermost fold
+"   Ctrl-Tab: open all folds
+map <TAB> za
+map <S-TAB> zA
+map <C-TAB> zR

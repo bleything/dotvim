@@ -46,11 +46,11 @@ set listchars+=precedes:«    " show a « when a line goes off the left
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ F O L D I N G   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldenable       " enable folding
-set foldlevelstart=0 " start with all folds collapsed when switching
-                     " buffers
-set foldcolumn=2     " adds two columns of fold status on the left-hand
-                     " side of the screen
+set foldenable        " enable folding
+set foldmethod=syntax " use the syntax definitions' folding
+set foldlevelstart=99 " start with all folds open when switching buffers
+set foldcolumn=3      " adds two columns of fold status on the left-hand
+                      " side of the screen
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ S E A R C H   O P T I O N S
