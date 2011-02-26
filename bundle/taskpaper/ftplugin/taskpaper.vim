@@ -1,16 +1,16 @@
 " plugin to handle the TaskPaper to-do list format
-" http://hogbaysoftware.com/projects/taskpaper
 " Language:	Taskpaper (http://hogbaysoftware.com/projects/taskpaper)
 " Maintainer:	David O'Callaghan <david.ocallaghan@cs.tcd.ie>
-" URL:		http://www.cs.tcd.ie/David.OCallaghan/taskpaper.vim/
-" Version:	0.3
-" Last Change:  2008-03-03
-
+" URL:		https://github.com/davidoc/taskpaper.vim
+" Last Change:  2011-02-15
 
 if exists("loaded_task_paper")
     finish
 endif
 let loaded_task_paper = 1
+
+" Define a default date format
+if !exists('task_paper_date_format') | let task_paper_date_format = "%Y-%m-%d" | endif
 
 "add '@' to keyword character set so that we can complete contexts as keywords
 setlocal iskeyword+=@-@
@@ -56,7 +56,7 @@ function! s:ToggleDone()
             let repl = substitute(line, "@done\(.*\)", "", "g")
             echo "undone!"
         else
-            let today = strftime("%Y-%m-%d", localtime())
+            let today = strftime(g:task_paper_date_format, localtime())
             let done_str = " @done(" . today . ")"
             let repl = substitute(line, "$", done_str, "g")
             echo "done!"
@@ -68,13 +68,37 @@ function! s:ToggleDone()
 
 endfunction
 
+" toggle @cancelled context tag on a task
+function! s:ToggleCancelled()
+
+    let line = getline(".")
+    if (line =~ '^\s*- ')
+        let repl = line
+        if (line =~ '@cancelled')
+            let repl = substitute(line, "@cancelled\(.*\)", "", "g")
+            echo "uncancelled!"
+        else
+            let today = strftime(g:task_paper_date_format, localtime())
+            let cancelled_str = " @cancelled(" . today . ")"
+            let repl = substitute(line, "$", cancelled_str, "g")
+            echo "cancelled!"
+        endif
+        call setline(".", repl)
+    else 
+        echo "not a task."
+    endif
+
+endfunction
+
 " Set up mappings
 noremap <unique> <script> <Plug>ToggleDone       :call <SID>ToggleDone()<CR>
+noremap <unique> <script> <Plug>ToggleCancelled   :call <SID>ToggleCancelled()<CR>
 noremap <unique> <script> <Plug>ShowContext      :call <SID>ShowContext()<CR>
 noremap <unique> <script> <Plug>ShowAll          :call <SID>ShowAll()<CR>
 noremap <unique> <script> <Plug>FoldAllProjects  :call <SID>FoldAllProjects()<CR>
 
-map <buffer> <silent> <LocalLeader>td <Plug>ToggleDone
-map <buffer> <silent> <LocalLeader>tc <Plug>ShowContext
-map <buffer> <silent> <LocalLeader>ta <Plug>ShowAll
-map <buffer> <silent> <LocalLeader>tp <Plug>FoldAllProjects
+map <buffer> <silent> <Leader>td <Plug>ToggleDone
+map <buffer> <silent> <Leader>tx <Plug>ToggleCancelled
+map <buffer> <silent> <Leader>tc <Plug>ShowContext
+map <buffer> <silent> <Leader>ta <Plug>ShowAll
+map <buffer> <silent> <Leader>tp <Plug>FoldAllProjects

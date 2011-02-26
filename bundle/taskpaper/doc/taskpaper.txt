@@ -2,7 +2,7 @@
 
 David O'Callaghan <david.ocallaghan@cs.tcd.ie>
 
-26th January 2010
+15th February 2011
 
 Introduction
 =============
@@ -75,11 +75,12 @@ commands (e.g. Ctrl-X Ctrl-N).
 The plugin defines some new mappings: 
 
     \td     Mark task as done
+    \tx     Mark task as cancelled
     \tc     Show all tasks with context under cursor
     \tp     Fold all projects
     \ta     Show all projects and tasks
 
-Note: if `<LocalLeader>` has been changed (e.g. `:let maplocalleader=",,"`)
+Note: if `<Leader>` has been changed (e.g. `:let mapleader=",,"`)
 then its value should be used instead of `\` in the mappings.
 
 Marking a task as done will add the "@done" context tag to the end of the
@@ -97,6 +98,16 @@ projects.
 To show all projects and tasks use the `\ta` command. This disables folding so
 that the entire file is expanded.
 
+Configuration
+==============
+
+To change the default date format string used when marking a task complete,
+define the `task_paper_date_format` variable. The format matches your system's
+`strftime()` function.
+
+For example, to include the date and time in ISO8601 format:
+
+    let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
 File-type Detection
 ====================
 
@@ -106,7 +117,7 @@ type for all files with the ".taskpaper" extension.
 Licence
 ========
 
-Copyright (C) 2007--2008 by David O'Callaghan <david.ocallaghan@cs.tcd.ie>
+Copyright (C) 2007--2011 by David O'Callaghan <david.ocallaghan@cs.tcd.ie>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -147,6 +158,15 @@ or patches to improve TaskPaper.vim:
    - suggested change to folding
  * Andreas Kühntopf 
    - display non-tasks as comments
+ * Julien Blanchard (https://github.com/julienXX)
+   - added ToggleCancelled
+ * Robert James Kaes (https://github.com/rjkaes)
+   - added task_paper_date_format
+ * Adriano Castro (https://github.com/adrianocastro)
+   - use tabs not spaces (noexpandtab)
+ * Morgan Sutherland (https://github.com/msutherl)
+   - Use <Leader> rather than <LocalLeader>
+   - Start new task after <CR>
 
 Contact
 ========
