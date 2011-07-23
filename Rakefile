@@ -21,6 +21,7 @@ namespace :update do
   BUNDLES = {
     # plugins
     :bufexplorer   => "http://www.vim.org/scripts/download_script.php?src_id=12904",
+    :css_color     => "git://github.com/ap/vim-css-color.git",
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
     :rails         => "git://github.com/tpope/vim-rails.git",
