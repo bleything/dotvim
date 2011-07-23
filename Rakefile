@@ -33,9 +33,12 @@ namespace :update do
     :syntax_git       => "git://github.com/tpope/vim-git.git",
     :syntax_haml_sass => "git://github.com/tpope/vim-haml.git",
     :syntax_markdown  => "git://github.com/ujihisa/vim-markdown.git",
-    :syntax_rdoc      => "git://github.com/hallison/vim-rdoc.git",
+    :syntax_rdoc      => "git://github.com/depuracao/vim-rdoc.git",
     :syntax_slidedown => "git://github.com/bleything/vim-slidedown.git",
-    :syntax_textile   => "git://github.com/timcharper/textile.vim.git"
+    :syntax_textile   => "git://github.com/timcharper/textile.vim.git",
+
+    # color schemes
+    :colors_solarized => "git://github.com/altercation/vim-colors-solarized.git"
   }
 
   desc "update any bundles defined in the Rakefile"

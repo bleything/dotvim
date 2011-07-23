@@ -105,6 +105,7 @@ let s:delimiterMap = {
     \ 'calibre': { 'left': '//' },
     \ 'catalog': { 'left': '--', 'right': '--' },
     \ 'c': { 'left': '/*','right': '*/', 'leftAlt': '//' },
+    \ 'cf': { 'left': '<!---', 'right': '--->' },
     \ 'cfg': { 'left': '#' },
     \ 'cg': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'ch': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -150,6 +151,7 @@ let s:delimiterMap = {
     \ 'eruby': { 'left': '<%#', 'right': '%>', 'leftAlt': '<!--', 'rightAlt': '-->' },
     \ 'expect': { 'left': '#' },
     \ 'exports': { 'left': '#' },
+    \ 'fancy': { 'left': '#' },
     \ 'factor': { 'left': '! ', 'leftAlt': '!# ' },
     \ 'fgl': { 'left': '#' },
     \ 'focexec': { 'left': '-*' },
@@ -234,6 +236,7 @@ let s:delimiterMap = {
     \ 'matlab': { 'left': '%' },
     \ 'mel': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'mib': { 'left': '--' },
+    \ 'mirah': {'left': '#'},
     \ 'mkd': { 'left': '>' },
     \ 'mma': { 'left': '(*', 'right': '*)' },
     \ 'model': { 'left': '$', 'right': '$' },
@@ -248,6 +251,8 @@ let s:delimiterMap = {
     \ 'natural': { 'left': '/*' },
     \ 'ncf': { 'left': ';' },
     \ 'newlisp': { 'left': ';' },
+    \ 'nginx': { 'left': '#' },
+    \ 'nimrod': { 'left': '#' },
     \ 'nroff': { 'left': '\"' },
     \ 'nsis': { 'left': '#' },
     \ 'ntp': { 'left': '#' },
@@ -258,6 +263,7 @@ let s:delimiterMap = {
     \ 'occam': { 'left': '--' },
     \ 'omlet': { 'left': '(*', 'right': '*)' },
     \ 'omnimark': { 'left': ';' },
+    \ 'ooc': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'openroad': { 'left': '//' },
     \ 'opl': { 'left': "REM" },
     \ 'ora': { 'left': '#' },
@@ -267,6 +273,7 @@ let s:delimiterMap = {
     \ 'pcap': { 'left': '#' },
     \ 'pccts': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'pdf': { 'left': '%' },
+    \ 'perl': { 'left': '#' },
     \ 'pfmain': { 'left': '//' },
     \ 'php': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'pic': { 'left': ';' },
@@ -286,6 +293,7 @@ let s:delimiterMap = {
     \ 'ps1': { 'left': '#' },
     \ 'psf': { 'left': '#' },
     \ 'ptcap': { 'left': '#' },
+    \ 'puppet': { 'left': '#' },
     \ 'python': { 'left': '#' },
     \ 'radiance': { 'left': '#' },
     \ 'ratpoison': { 'left': '#' },
@@ -310,6 +318,7 @@ let s:delimiterMap = {
     \ 'sed': { 'left': '#' },
     \ 'sgmldecl': { 'left': '--', 'right': '--' },
     \ 'sgmllnx': { 'left': '<!--', 'right': '-->' },
+    \ 'sh': { 'left': '#' },
     \ 'sicad': { 'left': '*' },
     \ 'simula': { 'left': '%', 'leftAlt': '--' },
     \ 'sinda': { 'left': '$' },
@@ -1392,6 +1401,12 @@ endfunction
 function s:UncommentLineNormal(line)
     let line = a:line
 
+    "get the positions of all delim types on the line
+    let indxLeft = s:FindDelimiterIndex(s:Left(), line)
+    let indxLeftAlt = s:FindDelimiterIndex(s:Left({'alt': 1}), line)
+    let indxRight = s:FindDelimiterIndex(s:Right(), line)
+    let indxRightAlt = s:FindDelimiterIndex(s:Right({'alt': 1}), line)
+
     "get the comment status on the line so we know how it is commented
     let lineCommentStatus =  s:IsCommentedOuttermost(s:Left(), s:Right(), s:Left({'alt': 1}), s:Right({'alt': 1}), line)
 
@@ -1406,34 +1421,23 @@ function s:UncommentLineNormal(line)
     "it is not properly commented with any delims so we check if it has
     "any random left or right delims on it and remove the outtermost ones
     else
-        "get the positions of all delim types on the line
-        let indxLeft = s:FindDelimiterIndex(s:Left(), line)
-        let indxLeftAlt = s:FindDelimiterIndex(s:Left({'alt': 1}), line)
-        let indxRight = s:FindDelimiterIndex(s:Right(), line)
-        let indxRightAlt = s:FindDelimiterIndex(s:Right({'alt': 1}), line)
-
         "remove the outter most left comment delim
         if indxLeft != -1 && (indxLeft < indxLeftAlt || indxLeftAlt == -1)
             let line = s:RemoveDelimiters(s:Left(), '', line)
-        elseif indxLeftAlt != -1
+        elseif indxLeftAlt != -1 && g:NERDRemoveAltComs
             let line = s:RemoveDelimiters(s:Left({'alt': 1}), '', line)
         endif
 
         "remove the outter most right comment delim
         if indxRight != -1 && (indxRight < indxRightAlt || indxRightAlt == -1)
             let line = s:RemoveDelimiters('', s:Right(), line)
-        elseif indxRightAlt != -1
+        elseif indxRightAlt != -1 && g:NERDRemoveAltComs
             let line = s:RemoveDelimiters('', s:Right({'alt': 1}), line)
         endif
     endif
 
 
-    let indxLeft = s:FindDelimiterIndex(s:Left(), line)
-    let indxLeftAlt = s:FindDelimiterIndex(s:Left({'alt': 1}), line)
     let indxLeftPlace = s:FindDelimiterIndex(g:NERDLPlace, line)
-
-    let indxRightPlace = s:FindDelimiterIndex(g:NERDRPlace, line)
-    let indxRightAlt = s:FindDelimiterIndex(s:Right({'alt': 1}), line)
     let indxRightPlace = s:FindDelimiterIndex(g:NERDRPlace, line)
 
     let right = s:Right()
