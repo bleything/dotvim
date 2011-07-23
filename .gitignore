@@ -1,5 +1,6 @@
 swapfiles/*
 undofiles/*
+.netrwhist
 
 # plugins follow
 bundle/fugitive/.git
