@@ -21,11 +21,12 @@ Optionally, you may want to update the bundles:
 * The {candycode}[http://www.vim.org/scripts/script.php?script_id=1635] color scheme
 * The {deveiate}[http://www.vim.org/scripts/script.php?script_id=2277] color scheme
 * The {ir_black}[http://blog.infinitered.com/entries/show/8] color scheme
+* The {solarized}[http://ethanschoonover.com/solarized] color scheme
 
 Also, some plugins:
 
 * {Buffer Explorer}[http://www.vim.org/scripts/script.php?script_id=42]
-* {CamelCaseMotion}[http://www.vim.org/scripts/script.php?script_id=1905]
+* {CSS Color}[https://github.com/ap/vim-css-color]
 * {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]
 * {NERD Tree}[http://www.vim.org/scripts/script.php?script_id=1658]
 * {Pathogen}[http://www.vim.org/scripts/script.php?script_id=2332]
@@ -45,6 +46,7 @@ Aaaaaalso, some syntax definitions:
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
 * {Slidedown}[http://www.vim.org/scripts/script.php?script_id=3069]
 * {Textile}[http://www.vim.org/scripts/script.php?script_id=2305]
+* {VCL}[https://github.com/smerrill/vcl-vim-plugin]
 
 == Credits
 
