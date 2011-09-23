@@ -37,6 +37,7 @@ namespace :update do
     :syntax_rdoc      => "git://github.com/depuracao/vim-rdoc.git",
     :syntax_slidedown => "git://github.com/bleything/vim-slidedown.git",
     :syntax_textile   => "git://github.com/timcharper/textile.vim.git",
+    :syntax_vcl       => "git://github.com/smerrill/vcl-vim-plugin.git",
 
     # color schemes
     :colors_solarized => "git://github.com/altercation/vim-colors-solarized.git"
