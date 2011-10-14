@@ -25,6 +25,7 @@ Optionally, you may want to update the bundles:
 
 Also, some plugins:
 
+* {ack}[http://www.vim.org/scripts/script.php?script_id=2572]
 * {Buffer Explorer}[http://www.vim.org/scripts/script.php?script_id=42]
 * {CSS Color}[https://github.com/ap/vim-css-color]
 * {NERD Commenter}[http://www.vim.org/scripts/script.php?script_id=1218]

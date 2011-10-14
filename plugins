@@ -32,7 +32,12 @@ map <leader>d :NERDTreeToggle<cr>
 
 """ Tabular
 " sets ,a to align = and => lines
-map <leader>a :Tabularize /=>\?<cr>
+map <leader><C-I> :Tabularize /=>\?<cr>
 
 """ Taglist
 map <leader>t :TlistToggle<cr>
+
+""" ack
+map <leader>ack :Ack 
+map <leader>an :cn<cr>
+map <leader>ap :cp<cr>
