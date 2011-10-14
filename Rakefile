@@ -16,6 +16,9 @@ task :default do
   puts "  $ rake update:bundles"
 end
 
+desc 'Update everything!'
+task :update => [ 'update:bundles' ]
+
 namespace :update do
 
   BUNDLES = {
