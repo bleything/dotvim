@@ -45,6 +45,7 @@ Aaaaaalso, some syntax definitions:
 * {Markdown}[http://github.com/ujihisa/vim-markdown]
 * {nginx}[http://www.vim.org/scripts/script.php?script_id=1886]
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
+* {Scala}[https://github.com/derekwyatt/vim-scala]
 * {Slidedown}[http://www.vim.org/scripts/script.php?script_id=3069]
 * {Textile}[http://www.vim.org/scripts/script.php?script_id=2305]
 * {VCL}[https://github.com/smerrill/vcl-vim-plugin]
