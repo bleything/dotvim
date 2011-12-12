@@ -22,6 +22,7 @@ Optionally, you may want to update the bundles:
 * The {deveiate}[http://www.vim.org/scripts/script.php?script_id=2277] color scheme
 * The {ir_black}[http://blog.infinitered.com/entries/show/8] color scheme
 * The {solarized}[http://ethanschoonover.com/solarized] color scheme
+* The {xoria256}[http://www.vim.org/scripts/script.php?script_id=2140] color scheme
 
 Also, some plugins:
 
