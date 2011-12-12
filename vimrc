@@ -11,7 +11,7 @@
 """ To install, make this directory live at ~/.vim and then make the
 """ vimrc file live at ~/.vimrc.  You may also want to run:
 """
-"""   $ cd ~/.vim && rake install:plugins
+"""   $ cd ~/.vim && rake update
 """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

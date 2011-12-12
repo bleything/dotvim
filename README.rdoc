@@ -13,7 +13,7 @@ Pretty straightforward.  Clone and symlink:
 
 Optionally, you may want to update the bundles:
 
-  $ cd ~/.vim && rake update:bundles
+  $ cd ~/.vim && rake update
 
 == What's Inside?!
 
