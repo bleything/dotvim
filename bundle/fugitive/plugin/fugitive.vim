@@ -116,7 +116,7 @@ function! s:ExtractGitDir(path) abort
   let ofn = ""
   let nfn = fn
   while fn != ofn
-    if filereadable(fn . '/.git/HEAD')
+    if isdirectory(fn) && filereadable(fn . '/.git/HEAD')
       return s:sub(simplify(fnamemodify(fn . '/.git',':p')),'\W$','')
     elseif fn =~ '\.git$' && filereadable(fn . '/HEAD')
       return s:sub(simplify(fnamemodify(fn,':p')),'\W$','')
@@ -1228,6 +1228,9 @@ function! s:diffthis()
     let w:fugitive_diff_restore .= &l:wrap ? ' wrap' : ' nowrap'
     let w:fugitive_diff_restore .= ' foldmethod=' . &l:foldmethod
     let w:fugitive_diff_restore .= ' foldcolumn=' . &l:foldcolumn
+    if has('cursorbind')
+      let w:fugitive_diff_restore .= (&l:cursorbind ? ' ' : ' no') . 'cursorbind'
+    endif
     diffthis
   endif
 endfunction
@@ -1873,7 +1876,7 @@ function! s:BufReadIndex()
       endtry
       set ft=gitcommit
     endif
-    setlocal ro noma nomod nomodeline bufhidden=wipe
+    setlocal ro noma nomod nomodeline noswapfile bufhidden=wipe
     call s:JumpInit()
     nunmap   <buffer>          P
     nunmap   <buffer>          ~
