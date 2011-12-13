@@ -46,6 +46,7 @@ Aaaaaalso, some syntax definitions:
 * {JSON}[http://www.vim.org/scripts/script.php?script_id=1945]
 * {Markdown}[http://github.com/ujihisa/vim-markdown]
 * {nginx}[http://www.vim.org/scripts/script.php?script_id=1886]
+* {Processing}[https://github.com/sophacles/vim-processing]
 * {RDoc}[http://www.vim.org/scripts/script.php?script_id=2878]
 * {Scala}[https://github.com/derekwyatt/vim-scala]
 * {Slidedown}[http://www.vim.org/scripts/script.php?script_id=3069]

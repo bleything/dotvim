@@ -29,6 +29,7 @@ namespace :update do
     :fugitive      => "git://github.com/tpope/vim-fugitive.git",
     :nerdcommenter => "git://github.com/scrooloose/nerdcommenter.git",
     :nerdtree      => "git://github.com/scrooloose/nerdtree.git",
+    :processing    => "git://github.com/sophacles/vim-processing.git",
     :rails         => "git://github.com/tpope/vim-rails.git",
     :surround      => "git://github.com/tpope/vim-surround.git",
     :tabular       => "git://github.com/godlygeek/tabular",
