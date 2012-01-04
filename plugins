@@ -31,8 +31,11 @@ map <leader>cu <plug>NERDCommenterUncomment
 map <leader>d :NERDTreeToggle<cr>
 
 """ Tabular
-" sets ,a to align = and => lines
-map <leader><C-I> :Tabularize /=>\?<cr>
+" sets ,a= to align = and => lines
+map <leader>a= :Tabularize /=>\?<cr>
+
+" sets ,a, to align on commas (useful for stacked method calls, etc)
+map <leader>a, :Tabularize /=>\?<cr>
 
 """ Taglist
 map <leader>t :TlistToggle<cr>
