@@ -47,7 +47,7 @@ set listchars+=precedes:«    " show a « when a line goes off the left
 """ F O L D I N G   O P T I O N S
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldenable        " enable folding
-set foldmethod=syntax " use the syntax definitions' folding
+set foldmethod=indent " use the syntax definitions' folding
 set foldlevelstart=99 " start with all folds open when switching buffers
 set foldcolumn=3      " adds two columns of fold status on the left-hand
                       " side of the screen
