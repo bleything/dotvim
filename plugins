@@ -35,7 +35,7 @@ map <leader>d :NERDTreeToggle<cr>
 map <leader>a= :Tabularize /=>\?<cr>
 
 " sets ,a, to align on commas (useful for stacked method calls, etc)
-map <leader>a, :Tabularize /=>\?<cr>
+map <leader>a, :Tabularize /,<cr>
 
 """ Taglist
 map <leader>t :TlistToggle<cr>
